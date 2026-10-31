@@ -1,0 +1,21 @@
+=== 洁净目录部署演练 2026-10-30 10:26:20 ===
+演练目录：C:\Users\lenovo\AppData\Local\Temp\campus_rehearsal（仅含提交包内容）
+[1] 解压提交包：323 个文件
+[2] 写入 .env（评委视角=自备智谱 Key；端口换 8911/8912 与主服务隔离）
+[3] 启动模拟教务 API :8911 ...
+    health={"status":"ok"}
+[4] 启动智能体服务 :8912 ...
+    health={"status":"ok","model":"glm-4.6","api_key_configured":true,"retrieval":"BM25Retriever","corpus_chunks":51,"tools":["query_score","query_timetable","search_campu
+[5] 运行冒烟用例（评委快速验证路径，README 第 5 步）...
+    exit=0，耗时 20s
+    ---- pytest 输出（尾部）----
+    plugins: anyio-4.14.1, langsmith-0.14.12, locust-2.47.0, platformdirs-4.13.5, html-4.2.0, metadata-3.1.1
+    collecting ... collected 61 items / 60 deselected / 1 selected
+    
+    tests/test_01_functional.py::test_smoke_functional PASSED                [100%]
+    
+    ====================== 1 passed, 60 deselected in 18.21s ======================
+    ----------------------------
+[6] 结论：✅ 洁净目录部署+冒烟 通过
+说明：本次为同机新目录演练（解释器与依赖为宿主环境）；跨物理机部署差异主要为 pip 安装时长，
+      requirements.txt 已在 README 验证可一次装齐（本机即按其部署）。
